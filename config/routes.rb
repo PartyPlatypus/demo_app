@@ -2,6 +2,12 @@ DemoApp::Application.routes.draw do
 
   root to: 'static_pages#home'
 
+  resources :microposts
+
+  resources :sessions, only: [:new, :create, :destroy]
+
+  resources :users
+
   match '/signup',  to: 'users#new'
 
   match '/help',    to: 'static_pages#help'
@@ -10,10 +16,9 @@ DemoApp::Application.routes.draw do
 
   match '/contact', to: 'static_pages#contact'
 
-  resources :microposts
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
 
-
-  resources :users
 
 
   # The priority is based upon order of creation:
